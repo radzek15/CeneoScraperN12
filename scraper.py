@@ -25,6 +25,7 @@ features = {
     "publish_date": ["span.user-post__published > time:nth-child(1)", "datetime"],
     "purchase_date": ["span.user-post__published > time:nth-child(2)", "datetime"]
 }
+print(type(features))
 
 product_id = input("Podaj kod produktu: ")
 next_page = "https://www.ceneo.pl/{}#tab=reviews".format(product_id)
@@ -45,7 +46,7 @@ while next_page:
             get_feature(page_dom, "a.pagination__next", "href")
     except TypeError:
         next_page = None 
-    print(next_page)
+    #print(next_page)
 
 with open("opinions/{}.json".format(product_id), "w", encoding="UTF-8") as jf:
     json.dump(all_opinions, jf, indent=4, ensure_ascii=False)
