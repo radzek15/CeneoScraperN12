@@ -32,7 +32,7 @@ plt.savefig(f"plots\s{product_id}bar.png")
 plt.close()
 
 recomm = opinions.recomm.value_counts(dropna=False).sort_index()
-names = 'Polecam', 'Nie Polecam', 'Nie mam zdania'
+names = 'Nie Polecam', 'Polecam', 'Nie mam zdania'
 recomm.plot.pie(
     shadow= True , 
     autopct='%1.1f%%', 

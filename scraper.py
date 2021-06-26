@@ -39,7 +39,8 @@ while next_page:
         single_opinion = {key:get_feature(opinion,*value) for key, value in features.items()}
         single_opinion["opinion_id"] = opinion["data-entry-id"],
         all_opinions.append(single_opinion)
-
+        #all_opinions.append(str(single_opinion)) - Po użyciu str(single_opinion) analyzer generuje błąd
+ 
     try:
         next_page = 'https://www.ceneo.pl' + \
             get_feature(page_dom, "a.pagination__next", "href")
