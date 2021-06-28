@@ -12,7 +12,7 @@ product_id = input("Podaj kod produktu: ")
 
 opinions = pd.read_json("opinions/{}.json".format(product_id))
 
-def transform_stars(stars):
+def Stars(stars):
     return float(stars.split("/")[0].replace(","),".")
 
 opinions_count = opinions.opinion_id.count()
@@ -30,8 +30,8 @@ plt.ylabel("Liczba opinii")
 plt.savefig(f"plots\s{product_id}bar.png")
 plt.close()
 
-recomm = opinions.recomm.value_counts(dropna=False).sort_index()
-names = 'Nie Polecam', 'Polecam', 'Nie mam zdania'
+recomm = opinions.recomm.value_counts(dropna=False).reindex([True,False,float("NaN")], fill_value = 0)
+names = 'Polecam', 'Nie Polecam', 'Nie mam zdania'
 recomm.plot.pie(
     shadow= True , 
     autopct='%1.1f%%', 
