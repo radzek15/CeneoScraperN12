@@ -37,9 +37,18 @@ while next_page:
 
     for opinion in opinions:
         single_opinion = {key:get_feature(opinion,*value) for key, value in features.items()}
-        single_opinion["opinion_id"] = opinion["data-entry-id"],
+        single_opinion["opinion_id"] = int(opinion["data-entry-id"])
+        if single_opinion["recomm"] == "Polecam":
+            single_opinion["recomm"] = True
+        elif single_opinion["recomm"] == "Nie polecam":
+            single_opinion["recomm"] = False
+        else:
+            single_opinion["recomm"] = None
+        single_opinion["stars"] = float(single_opinion["stars"].split("/")[0].replace(",","."))
+        single_opinion["useful"] = int(single_opinion["useful"])
+        single_opinion["useless"] = int(single_opinion["useless"])
+        single_opinion["purchased"] = bool(single_opinion["purchased"])
         all_opinions.append(single_opinion)
-        #all_opinions.append(str(single_opinion)) - Po użyciu str(single_opinion) analyzer generuje błąd
  
     try:
         next_page = 'https://www.ceneo.pl' + \
